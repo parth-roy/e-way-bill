@@ -28,37 +28,8 @@
         <main class="glass-panel">
             <form id="qr-form">
                 <div class="input-group">
-                    <label for="consignee">Consignee Name</label>
-                    <input type="text" id="consignee" name="consignee" required placeholder="e.g. M/S KUNDU TRADERS">
-                </div>
-
-                <div class="input-group">
-                    <label for="commodity">Commodity</label>
-                    <input type="text" id="commodity" name="commodity" required placeholder="e.g. JUTE">
-                </div>
-
-                <div class="input-row">
-                    <div class="input-group">
-                        <label for="quantity">Quantity (QTWT)</label>
-                        <input type="number" id="quantity" name="quantity" step="0.1" required placeholder="e.g. 104.0">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="value">Value</label>
-                        <input type="number" id="value" name="value" step="1" required placeholder="e.g. 1700000">
-                    </div>
-                </div>
-
-                <div class="input-row">
-                    <div class="input-group">
-                        <label for="marketFee">Market Fee (1% of Value)</label>
-                        <input type="number" id="marketFee" name="marketFee" step="0.01" required readonly class="readonly-input">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="vehicleNo">Vehicle Number</label>
-                        <input type="text" id="vehicleNo" name="vehicleNo" required placeholder="e.g. WB51F0494">
-                    </div>
+                    <label for="rawString">Raw E-Way Bill String</label>
+                    <textarea id="rawString" name="rawString" required placeholder="e.g. PRN,PG-1AS2F8|PC,84L|LN,|CSE,M/S KUNDU TRADERS |COM,JUTE`QTWT,104.0`VAL,1700000`MKTFE,17000.00`|VN,WB51F0494|TN,|TCN,|VD,25-07-2026 07:37:43|PD,23-07-2026 07:37:43|PT,SPOT|" rows="8"></textarea>
                 </div>
 
                 <button type="submit" id="generate-btn">

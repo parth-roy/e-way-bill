@@ -119,7 +119,7 @@ label {
     transition: color 0.2s ease;
 }
 
-input {
+input, textarea {
     width: 100%;
     background: var(--input-bg);
     border: 1px solid var(--input-border);
@@ -133,12 +133,18 @@ input {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
-input:focus {
+textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+input:focus, textarea:focus {
     border-color: var(--accent);
     box-shadow: 0 0 0 4px var(--input-focus);
 }
 
-input:focus + label {
+.input-group:focus-within label {
     color: var(--accent);
 }
 
@@ -149,7 +155,7 @@ input.readonly-input {
     border-color: #e2e8f0;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
     color: #94a3b8;
 }
 

@@ -1,9 +1,6 @@
 const QRCode = require('qrcode');
 
-const pad = (num) => num.toString().padStart(2, '0');
-const formatDate = (date) => {
-    return `${pad(date.getDate())}-${pad(date.getMonth() + 1)}-${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-};
+
 
 module.exports = async (req, res) => {
     // Standard Vercel Serverless CORS headers
@@ -21,20 +18,11 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { consignee, commodity, quantity, value, marketFee, vehicleNo } = req.body;
+        const { rawString } = req.body;
 
-        if (!consignee || !commodity || !quantity || !value || !marketFee || !vehicleNo) {
-            return res.status(400).json({ error: 'Missing required fields' });
+        if (!rawString) {
+            return res.status(400).json({ error: 'Missing raw E-Way Bill string' });
         }
-
-        const now = new Date();
-        const validDateObj = new Date(now.getTime() + 48 * 60 * 60 * 1000);
-        
-        const printDate = formatDate(now);
-        const validDate = formatDate(validDateObj);
-
-        // String formatting precisely as required
-        const rawString = `PRN,PG-1AS2F8|PC,84L|LN,|CSE,${consignee.toUpperCase()} |COM,${commodity.toUpperCase()}\`QTWT,${Number(quantity).toFixed(1)}\`VAL,${value}\`MKTFE,${Number(marketFee).toFixed(2)}\`|VN,${vehicleNo.toUpperCase()}|TN,|TCN,|VD,${validDate}|PD,${printDate}|PT,SPOT|`;
 
         const qrConfig = {
             errorCorrectionLevel: 'M',

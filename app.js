@@ -1,23 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('qr-form');
-    const valueInput = document.getElementById('value');
-    const marketFeeInput = document.getElementById('marketFee');
     const generateBtn = document.getElementById('generate-btn');
     const btnText = generateBtn.querySelector('.btn-text');
     const loadingSpinner = document.getElementById('loading-spinner');
     const resultSection = document.getElementById('result-section');
     const qrImage = document.getElementById('qr-image');
     const downloadBtn = document.getElementById('download-btn');
-
-    // Automatically calculate market fee (1% of value)
-    valueInput.addEventListener('input', (e) => {
-        const val = parseFloat(e.target.value);
-        if (!isNaN(val)) {
-            marketFeeInput.value = (val * 0.01).toFixed(2);
-        } else {
-            marketFeeInput.value = '';
-        }
-    });
 
     // Backend API URL (Vercel Serverless Function)
     const API_URL = '/api/generate-qr';
@@ -28,12 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Extract data
         const formData = new FormData(form);
         const payload = {
-            consignee: formData.get('consignee'),
-            commodity: formData.get('commodity'),
-            quantity: formData.get('quantity'),
-            value: formData.get('value'),
-            marketFee: formData.get('marketFee'),
-            vehicleNo: formData.get('vehicleNo')
+            rawString: formData.get('rawString')
         };
 
         // UI Loading State
@@ -67,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Store base64 for download
                 qrImage.setAttribute('data-download', data.qrImage);
                 // Also store a nice filename
-                const filename = `eway_qr_${payload.vehicleNo.replace(/\s+/g, '')}.jpg`;
+                const filename = `eway_qr_code.jpg`;
                 qrImage.setAttribute('data-filename', filename);
             }
 
