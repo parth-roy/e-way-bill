@@ -19,12 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Environment API URL configuration
-    // Fallback to local dev server if not in production
-    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-        ? 'http://localhost:3000/api/generate-qr'
-        : 'https://transport-qr-backend.onrender.com/api/generate-qr'; 
-        // NOTE: Please update the render URL domain once deployed.
+    // Backend API URL (Vercel Serverless Function)
+    const API_URL = '/api/generate-qr';
         
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -77,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Error:', error);
-            alert(`Error: ${error.message}. If the backend is on a free Render tier, it might be sleeping. Please try again in a few seconds.`);
+            alert(`Error: ${error.message}. Could not connect to the backend server at 139.59.60.77.`);
         } finally {
             // Reset UI State
             btnText.classList.remove('hidden');

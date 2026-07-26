@@ -1,0 +1,8 @@
+{
+  "name": "transport-qr-vercel",
+  "version": "1.0.0",
+  "description": "Transport E-Way Bill QR Code Generator with Vercel Serverless",
+  "dependencies": {
+    "qrcode": "^1.5.3"
+  }
+}
